@@ -1,6 +1,16 @@
 (() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Runs fn every ms, but only while el is on screen, so nothing touches the DOM off-screen during a scroll.
+  function whileVisible(el, ms, fn) {
+    if (reduce || !el) return;
+    let timer = null;
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !timer) timer = setInterval(fn, ms);
+      else if (!e.isIntersecting && timer) { clearInterval(timer); timer = null; }
+    }).observe(el);
+  }
+
   // LED board: a small simulated stop panel that counts down and rotates lines.
   const rows = document.getElementById("rows");
   if (!rows) return;
@@ -26,14 +36,14 @@
     clock.textContent = `${h}:${mm}`;
   }
   render(false);
-  if (!reduce) setInterval(() => {
+  whileVisible(rows, 2600, () => {
     minute++;
     lines.forEach(l => l.m--);
     const gone = lines.findIndex(l => l.m < 0);
     if (gone >= 0) { const [l] = lines.splice(gone, 1); l.m = 12 + Math.floor(Math.random() * 6); lines.push(l); }
     lines.sort((a, b) => a.m - b.m);
     render(true);
-  }, 2600);
+  });
 
   // Pinned phone: swap the screen to match the step in view.
   const shots = [...document.querySelectorAll("#screen img")];
@@ -55,12 +65,12 @@
   }
 
   // Countdown in the "nearby" card; the wording comes from the page ("en %m min" / "in %m min").
-  if (!reduce) setInterval(() => {
+  whileVisible(document.querySelector(".tick"), 3000, () => {
     document.querySelectorAll(".tick").forEach(b => {
       let m = +b.dataset.m - 1; if (m < 0) m = 15;
       b.dataset.m = m; b.textContent = m === 0 ? b.dataset.now : b.dataset.in.replace("%m", m);
     });
-  }, 3000);
+  });
 
   // "Your way": the format toggle and the phone switch together, every few seconds or on click.
   let clockFmt = false;
@@ -71,28 +81,33 @@
     seg.setAttribute("aria-pressed", String(v));
     if (current === 5) show(5);
   }
-  let fmtTimer = reduce ? null : setInterval(() => setClock(!clockFmt), 2600);
-  seg.addEventListener("click", () => { clearInterval(fmtTimer); fmtTimer = null; setClock(!clockFmt); });
+  let auto = true;
+  whileVisible(fmtStep, 2600, () => { if (auto) setClock(!clockFmt); });
+  seg.addEventListener("click", () => { auto = false; setClock(!clockFmt); });
 
-  // The active step is the card whose centre is nearest the phone's centre (or the viewport's centre when the phone is hidden).
+  // The active step is the card crossing a 1px line at the pinned phone's centre (the viewport's centre when the phone is hidden).
+  // An IntersectionObserver does this off the scroll path: no layout reads on every frame.
   const phone = document.querySelector(".pin .phone");
-  let current = 0, queued = false;
-  function sync() {
-    queued = false;
+  const cards = steps.map(s => s.querySelector(".card"));
+  let current = 0, io = null;
+  function watch() {
+    if (io) io.disconnect();
     const r = phone.getBoundingClientRect();
-    const target = r.height ? r.top + r.height / 2 : innerHeight / 2;
-    let best = 0, bestD = Infinity;
-    steps.forEach((s, k) => {
-      const c = s.querySelector(".card").getBoundingClientRect();
-      const d = Math.abs(c.top + c.height / 2 - target);
-      if (d < bestD) { bestD = d; best = k; }
-    });
-    if (best !== current) { current = best; show(best); }
+    const pinTop = r.height ? parseFloat(getComputedStyle(phone.parentElement).top) || 0 : 0;
+    const line = Math.round(r.height ? pinTop + r.height / 2 : innerHeight / 2);
+    io = new IntersectionObserver(es => {
+      es.forEach(e => {
+        if (!e.isIntersecting) return;
+        const k = cards.indexOf(e.target);
+        if (k !== current) { current = k; show(k); }
+      });
+    }, { rootMargin: `-${line}px 0px -${Math.max(0, innerHeight - line - 1)}px 0px` });
+    cards.forEach(c => io.observe(c));
   }
-  addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(sync); } }, { passive: true });
-  addEventListener("resize", () => show(current));
+  let resizeTimer;
+  addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { watch(); show(current); }, 200); });
   show(0);
-  sync();
+  watch();
 
   // Screenshot viewer
   const thumbs = [...document.querySelectorAll(".shots button")];

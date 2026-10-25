@@ -44,7 +44,7 @@
 html { color-scheme: light; }
 img { max-width: 100%; height: auto; }
 [hidden] { display: none !important; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--step-0)/1.6 var(--f-body); }
 a { color: var(--brand); }
 :focus-visible { outline: 3px solid var(--led); outline-offset: 3px; border-radius: 4px; }
@@ -54,8 +54,7 @@ h1, h2, h3 { font-family: var(--f-display); line-height: 1.05; text-wrap: balanc
 /* Header */
 .skip { position: absolute; left: 12px; top: -60px; z-index: 30; background: var(--bg); color: var(--ink); padding: 8px 14px; border-radius: 8px; }
 .skip:focus { top: calc(env(safe-area-inset-top, 0px) + 12px); }
-.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; color: #fff;
-  background: color-mix(in srgb, var(--hero-to) 88%, transparent); backdrop-filter: blur(10px); }
+.top { position: sticky; top: 0; z-index: 20; color: #fff; background: var(--hero-to); box-shadow: 0 1px 0 rgba(0, 0, 0, .12); }
 .top .wrap { display: flex; align-items: center; gap: 16px; padding-block: 10px; }
 .brand { display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; font: 800 1.05rem var(--f-display); }
 .brand img { width: 34px; height: 34px; border-radius: 9px; }
@@ -67,9 +66,8 @@ h1, h2, h3 { font-family: var(--f-display); line-height: 1.05; text-wrap: balanc
 
 /* Hero */
 .hero { color: #fff; background: linear-gradient(180deg, var(--hero-from), var(--hero-to)); position: relative; overflow: hidden; }
-.hero::before { content: ""; position: absolute; inset: 0; opacity: .14;
-  background-image: radial-gradient(rgba(255,255,255,.9) 1px, transparent 1.2px); background-size: 14px 14px;
-  mask-image: linear-gradient(180deg, #000, transparent 85%); }
+.hero::before { content: ""; position: absolute; inset: 0 0 40% 0; opacity: .12;
+  background-image: radial-gradient(rgba(255,255,255,.9) 1px, transparent 1.2px); background-size: 14px 14px; }
 .hero .wrap { position: relative; display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; padding-block: 56px 0; }
 .hero-copy { min-width: 0; padding-bottom: 56px; }
 .eyebrow { font: 700 var(--step--1) var(--f-display); letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
@@ -122,9 +120,8 @@ h1, h2, h3 { font-family: var(--f-display); line-height: 1.05; text-wrap: balanc
 
 /* Story */
 .story { position: relative; padding-block: 90px 60px; background: var(--surface); overflow: clip; }
-.story::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
-  background-image: radial-gradient(color-mix(in srgb, var(--brand) 35%, transparent) 1px, transparent 1.3px); background-size: 18px 18px;
-  mask-image: linear-gradient(180deg, transparent, #000 15%, #000 85%, transparent); }
+.story::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .35;
+  background-image: radial-gradient(color-mix(in srgb, var(--brand) 35%, transparent) 1px, transparent 1.3px); background-size: 18px 18px; }
 .story > .wrap { position: relative; }
 .story > .wrap > h2, .gallery h2 { font-size: var(--step-3); font-weight: 900; max-width: 18ch; }
 .intro { color: var(--muted); margin: 12px 0 0; max-width: 50ch; }
@@ -157,11 +154,11 @@ h1, h2, h3 { font-family: var(--f-display); line-height: 1.05; text-wrap: balanc
 .when b { color: var(--brand); font-variant-numeric: tabular-nums; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip { font-size: .82rem; padding: 4px 12px; border-radius: 999px; background: color-mix(in srgb, var(--c) 12%, var(--bg)); border: 1px solid color-mix(in srgb, var(--c) 30%, var(--line)); }
-.chip.live i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #3AA42B; margin-right: 6px; vertical-align: 1px; animation: pulse 1.6s infinite; }
-@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(58,164,43,.6); } 100% { box-shadow: 0 0 0 9px rgba(58,164,43,0); } }
+.chip.live i { display: inline-block; position: relative; width: 8px; height: 8px; border-radius: 50%; background: #3AA42B; margin-right: 6px; vertical-align: 1px; }
+.chip.live i::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #3AA42B; animation: pulse 1.6s infinite; }
+@keyframes pulse { from { transform: scale(1); opacity: .6; } to { transform: scale(3.2); opacity: 0; } }
 .stopdemo { grid-template-columns: auto 1fr; align-items: center; gap: 14px; }
-.compass { width: 56px; height: 56px; color: var(--ink); }
-.compass .needle { transform-origin: 32px 32px; animation: sway 4s ease-in-out infinite; }
+.compass { width: 56px; height: 56px; color: var(--ink); animation: sway 4s ease-in-out infinite; }
 @keyframes sway { 0%, 100% { transform: rotate(38deg); } 50% { transform: rotate(52deg); } }
 .linehead { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .pill { margin-left: auto; font-size: .78rem; font-weight: 700; color: #1f6b14; background: #d7f2cf; padding: 2px 10px; border-radius: 999px; }
@@ -205,12 +202,14 @@ h1, h2, h3 { font-family: var(--f-display); line-height: 1.05; text-wrap: balanc
   .step { min-height: 0; padding-block: 18px; }
   .step .mini { display: block; width: min(240px, 70%); margin: 18px auto 0; border-radius: 18px; box-shadow: var(--shadow); }
   .tickets { grid-template-columns: 1fr; }
-  .card { padding: 20px 18px; }
+  .card { padding: 20px 18px; transition: border-color .4s; }
+  .step.active .card { box-shadow: 0 8px 20px -12px rgba(8, 40, 70, .35); }
+  .step .mini { box-shadow: 0 10px 24px -14px rgba(8, 40, 70, .5); }
 }
 
 /* Reveal on scroll (progressive enhancement; resting state stays readable) */
 @supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 861px) {
     .reveal { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% cover 30%; }
     @keyframes reveal { from { opacity: .25; transform: translateY(32px); } }
   }
