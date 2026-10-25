@@ -46,9 +46,14 @@ When the app crashes, it sends a report to Firebase Crashlytics (Google) so we c
 
 ### Advertising (Google AdMob)
 
-The app is free and funded by Google AdMob ads. To show and measure them, the Google Mobile Ads SDK collects the device's advertising ID, the IP address, device and app information, and your interactions with ads.
+The app is free and funded by Google AdMob ads, which appear in some lists and at the bottom of some screens, never on the maps or full screen. To show and measure them and to prevent fraud, the Google Mobile Ads SDK collects and shares with Google:
 
-- In the European Economic Area, the UK and Switzerland, the app asks for your consent through Google's consent tool (UMP) before showing personalised ads. If you don't give it, ads aren't personalised. You can change your choice at any time in the app's settings.
+- device identifiers: the advertising ID, the app set ID and, if any, identifiers of the accounts signed in on the device;
+- the IP address, which may be used to estimate the device's approximate location (not your GPS location, which never leaves your phone);
+- your interactions with the app and the ads, such as opening the app, taps and video views;
+- diagnostic data about the app and the SDK, such as launch time, hangs and energy use.
+
+- In the European Economic Area, the UK and Switzerland, the app asks for your consent through Google's consent tool (UMP) before showing personalised ads. If you don't give it, ads aren't personalised. You can change your choice at any time in the app's settings (*More → Settings → Ad privacy options*).
 - You can reset or delete your advertising ID in Android settings (*Privacy → Ads*).
 - Google handles this data as described in [how Google uses information from sites or apps that use its services](https://policies.google.com/technologies/partner-sites).
 

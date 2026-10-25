@@ -46,9 +46,14 @@ Cuando la app falla, envía un informe a Firebase Crashlytics (Google) para que 
 
 ### Publicidad (Google AdMob)
 
-La app es gratuita y se financia con anuncios de Google AdMob. Para mostrarlos y medirlos, el SDK de anuncios de Google recoge el identificador de publicidad del dispositivo, la dirección IP, información del dispositivo y de la app, y tus interacciones con los anuncios.
+La app es gratuita y se financia con anuncios de Google AdMob, que aparecen en algunas listas y en la parte de abajo de algunas pantallas, nunca en los mapas ni a pantalla completa. Para mostrarlos, medirlos y prevenir el fraude, el SDK de anuncios de Google recoge y comparte con Google:
 
-- En el Espacio Económico Europeo, Reino Unido y Suiza, la app te pide el consentimiento con la herramienta de consentimiento de Google (UMP) antes de mostrar anuncios personalizados. Si no lo das, los anuncios no se personalizan. Puedes cambiar tu decisión en cualquier momento desde los ajustes de la app.
+- identificadores del dispositivo: el identificador de publicidad, el identificador de conjunto de aplicaciones y, si los hay, identificadores de las cuentas iniciadas en el dispositivo;
+- la dirección IP, que puede usarse para estimar la ubicación aproximada del dispositivo (no la ubicación de tu GPS, que no sale del móvil);
+- tus interacciones con la app y los anuncios, como abrir la app, los toques y las reproducciones de vídeo;
+- datos de diagnóstico de la app y del SDK, como el tiempo de arranque, los bloqueos y el consumo de energía.
+
+- En el Espacio Económico Europeo, Reino Unido y Suiza, la app te pide el consentimiento con la herramienta de consentimiento de Google (UMP) antes de mostrar anuncios personalizados. Si no lo das, los anuncios no se personalizan. Puedes cambiar tu decisión en cualquier momento desde los ajustes de la app (*Más → Ajustes → Opciones de privacidad de anuncios*).
 - Puedes restablecer o eliminar el identificador de publicidad en los ajustes de Android (*Privacidad → Anuncios*).
 - Google trata estos datos como se describe en [cómo usa Google la información de los sitios o aplicaciones que utilizan sus servicios](https://policies.google.com/technologies/partner-sites).
 
