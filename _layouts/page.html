@@ -1,0 +1,14 @@
+---
+layout: default
+---
+<div class="page-head">
+  <div class="wrap">
+    <h1>{{ page.heading | default: page.title }}</h1>
+    {%- if page.updated %}
+    <p>{{ site.data.i18n[page.lang].updated }} <time datetime="{{ page.updated | date: '%Y-%m-%d' }}">{% if page.lang == "es" %}{{ page.updated | date: "%-d" }} de {% assign m = page.updated | date: "%-m" | minus: 1 %}{{ site.data.i18n.es.months[m] }} de {{ page.updated | date: "%Y" }}{% else %}{{ page.updated | date: "%-d %B %Y" }}{% endif %}</time></p>
+    {%- endif %}
+  </div>
+</div>
+<div class="wrap prose">
+  {{ content }}
+</div>

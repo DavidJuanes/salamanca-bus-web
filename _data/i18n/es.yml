@@ -1,0 +1,110 @@
+locale: es_ES
+tagline: Tiempos de llegada del autobús urbano
+home: /
+skip: Saltar al contenido
+
+nav:
+  label: Principal
+  features: Funciones
+  screenshots: Capturas
+  privacy: Privacidad
+  switch_short: EN
+  switch_name: English
+
+play:
+  alt: Disponible en Google Play
+  badge: /assets/img/google-play-badge-es.png
+
+hero:
+  eyebrow: Autobuses urbanos de Salamanca
+  title: ¿Cuánto le falta a tu bus?
+  lead: Tiempos de llegada en tiempo real de tus paradas favoritas y de las que tienes más cerca.
+  note: Gratis · Sin registro · Android 8 o superior
+  board_label: Panel de parada de ejemplo con las próximas llegadas a Gran Vía, 38
+  board_stop: PARADA 222 · GRAN VÍA, 38
+
+stats:
+  label: Datos
+  lines: líneas, diurnas y nocturnas
+  stops: paradas, con su foto a pie de calle
+  since: en Google Play desde entonces
+  free: sin cuentas ni registros
+
+story:
+  kicker: Funciones
+  title: Todo lo que necesitas en la parada
+  intro: Seis paradas por la app. Baja la página y el móvil te enseña cada pantalla.
+  nearby:
+    title: Cerca de ti
+    text: Tus paradas favoritas y las más cercanas, con las próximas llegadas de cada línea y a qué distancia está el autobús.
+    in: "en %m min"
+    now: Llegando
+    first_away: a 780 m
+    first_then: luego en 16 min
+    second_away: a 1,4 km
+    second_then: luego en 18 min
+    chips: [Se actualiza solo, Distancia al bus, Búsqueda por número o nombre]
+    alt: Pantalla Cerca con las favoritas y las paradas cercanas
+  stop:
+    title: Reconoce tu parada
+    text: Cada parada tiene su foto de Street View, una brújula que te indica hacia dónde está y las llegadas de todas sus líneas.
+    detail: Parada 222 · a 290 m, hacia el noreste
+    chips: ["✎ Renómbrala: «Trabajo»", ★ Favorita, Compartir]
+    alt: Detalle de la parada Gran Vía, 38 con su foto
+  lines:
+    title: Todas las líneas
+    text: Diurnas y nocturnas, con su recorrido de ida y vuelta, su frecuencia y si están en servicio ahora mismo, también en festivos.
+    active: ● Activa
+    chips: [Cada 10 min, Ida y vuelta, Nocturnas N-1 y N-2]
+    alt: Recorrido de la línea 4, Cementerio - Puente Ladrillo
+  map:
+    title: Toda la red en el mapa
+    text: Todas las paradas y el recorrido real de las líneas por las calles. Combina las líneas que quieras y toca una parada para ver sus llegadas o cómo llegar a pie.
+    legend: Las 17 líneas
+    chips: [346 paradas, Cómo llegar a pie, Modo oscuro]
+    alt: Mapa de Salamanca con varias líneas
+  fares:
+    title: Tarifas al día
+    text: Billetes, bonos y abonos con su precio vigente, para saber qué te conviene antes de subir.
+    tickets:
+      - { name: Billete ordinario, price: "1,20 €" }
+      - { name: Bono-Bus, price: "0,37 €", unit: por viaje }
+      - { name: Abono joven, price: "7,34 €", unit: al mes }
+    chips: [Vigentes desde el 1 de enero de 2026]
+    alt: Pantalla de tarifas
+  yours:
+    title: A tu manera
+    text: Elige cómo ver los tiempos, el tema y el idioma. Funciona con TalkBack y con letra grande.
+    toggle: "Formato de llegada: en minutos o en hora"
+    relative: en 2 min
+    clock: "10:02"
+    chips: [◐ Claro y oscuro, ES · EN, Aa Letra grande, TalkBack]
+    alt: Pantalla Cerca en modo oscuro, con los tiempos en minutos
+
+gallery:
+  kicker: Capturas
+  title: Así se ve en tu móvil
+  zoom: Ampliar
+  viewer: Captura ampliada
+  close: Cerrar
+  prev: Anterior
+  next: Siguiente
+  shots:
+    - Tu bus, en tiempo real
+    - ¿Cuánto le falta a tu bus?
+    - Todas las líneas
+    - Recorrido parada a parada
+    - Toda la red, a tu manera
+    - Reconoce tu parada
+
+closing:
+  title: Sal de casa a tu hora
+
+footer:
+  label: Pie de página
+  privacy: Política de privacidad
+  disclaimer: Salamanca Bus es una app independiente y no está vinculada a Salamanca de Transportes ni al Ayuntamiento de Salamanca. Los tiempos de llegada son los que publica el servicio de información de Salamanca de Transportes.
+  trademark: Google Play y el logotipo de Google Play son marcas de Google LLC.
+
+updated: "Última actualización:"
+months: [enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]

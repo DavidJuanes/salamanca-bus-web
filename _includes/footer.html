@@ -1,0 +1,15 @@
+{%- assign t = include.t -%}
+{%- assign privacy = site.pages | where: "ref", "privacy" | where: "lang", page.lang | first -%}
+<footer>
+  <div class="wrap">
+    <nav aria-label="{{ t.footer.label }}">
+      <a href="{{ privacy.url }}">{{ t.footer.privacy }}</a>
+      <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a>
+      {%- if include.alt %}
+      <a href="{{ include.alt.url }}" hreflang="{{ include.alt.lang }}" lang="{{ include.alt.lang }}">{{ t.nav.switch_name }}</a>
+      {%- endif %}
+    </nav>
+    <p>{{ t.footer.disclaimer }}</p>
+    <p>© 2012–{{ site.time | date: "%Y" }} {{ site.author }} · {{ t.footer.trademark }}</p>
+  </div>
+</footer>

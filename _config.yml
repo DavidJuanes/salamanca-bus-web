@@ -1,0 +1,33 @@
+title: Salamanca Bus
+description: Tiempos de llegada de los autobuses urbanos de Salamanca, en tiempo real.
+url: https://salamancabus.davidjuanes.dev
+baseurl: ""
+lang: es
+author: David González Juanes
+play_url: https://play.google.com/store/apps/details?id=salamanca.bus
+contact_email: david.gonzalez.juanes@gmail.com
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+twitter:
+  card: summary_large_image
+
+defaults:
+  - scope: { path: "" }
+    values: { layout: default, image: /assets/img/og-es.jpg }
+  - scope: { path: "en" }
+    values: { image: /assets/img/og-en.jpg }
+
+exclude:
+  - README.md
+  - CLAUDE.md
+  - Gemfile
+  - Gemfile.lock
+  - .tool-versions
+  - vendor
+  - docs
+
+include:
+  - app-ads.txt

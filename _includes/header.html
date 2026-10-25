@@ -1,0 +1,16 @@
+{%- assign t = include.t -%}
+<a class="skip" href="#contenido">{{ t.skip }}</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="{{ t.home }}"><img src="/assets/img/icon.webp" alt="" width="34" height="34">{{ site.title }}</a>
+    <nav aria-label="{{ t.nav.label }}">
+      <a class="hide-s" href="{{ t.home }}#funciones">{{ t.nav.features }}</a>
+      <a class="hide-s" href="{{ t.home }}#capturas">{{ t.nav.screenshots }}</a>
+      {%- assign privacy = site.pages | where: "ref", "privacy" | where: "lang", page.lang | first %}
+      <a href="{{ privacy.url }}"{% if page.ref == "privacy" %} aria-current="page"{% endif %}>{{ t.nav.privacy }}</a>
+      {%- if include.alt %}
+      <a class="lang" href="{{ include.alt.url }}" hreflang="{{ include.alt.lang }}" lang="{{ include.alt.lang }}" title="{{ t.nav.switch_name }}">{{ t.nav.switch_short }}</a>
+      {%- endif %}
+    </nav>
+  </div>
+</header>

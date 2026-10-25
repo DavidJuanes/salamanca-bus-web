@@ -1,0 +1,109 @@
+locale: en_GB
+tagline: Real-time city bus arrivals
+home: /en/
+skip: Skip to content
+
+nav:
+  label: Main
+  features: Features
+  screenshots: Screenshots
+  privacy: Privacy
+  switch_short: ES
+  switch_name: Español
+
+play:
+  alt: Get it on Google Play
+  badge: /assets/img/google-play-badge-en.png
+
+hero:
+  eyebrow: Salamanca city buses
+  title: When's your bus coming?
+  lead: Real-time arrivals at your favourite stops and the ones closest to you.
+  note: Free · No sign-up · Android 8 or later
+  board_label: Example stop display with the next arrivals at Gran Vía, 38
+  board_stop: STOP 222 · GRAN VÍA, 38
+
+stats:
+  label: Facts
+  lines: lines, day and night
+  stops: stops, each with a street-level photo
+  since: on Google Play since then
+  free: no accounts, no sign-up
+
+story:
+  kicker: Features
+  title: Everything you need at the stop
+  intro: Six stops along the app. Scroll down and the phone shows you each screen.
+  nearby:
+    title: Near you
+    text: Your favourite stops and the closest ones, with the next arrivals of every line and how far away the bus is.
+    in: "in %m min"
+    now: Arriving
+    first_away: 780 m away
+    first_then: then in 16 min
+    second_away: 1.4 km away
+    second_then: then in 18 min
+    chips: [Updates by itself, Distance to the bus, Search by number or name]
+    alt: Nearby screen with favourite and nearby stops
+  stop:
+    title: Recognise your stop
+    text: Every stop has its Street View photo, a compass that points the way, and the arrivals of all its lines.
+    detail: Stop 222 · 290 m away, to the north-east
+    chips: ["✎ Rename it: “Work”", ★ Favourite, Share]
+    alt: Gran Vía, 38 stop detail with its photo
+  lines:
+    title: Every line
+    text: Day and night lines, with their outbound and return routes, how often they run and whether they're running right now, bank holidays included.
+    active: ● Running
+    chips: [Every 10 min, Outbound and return, Night lines N-1 and N-2]
+    alt: Route of line 4, Cementerio - Puente Ladrillo
+  map:
+    title: The whole network on a map
+    text: Every stop and the real route of each line through the streets. Combine any lines you like and tap a stop to see its arrivals or walking directions.
+    legend: The 17 lines
+    chips: [346 stops, Walking directions, Dark mode]
+    alt: Map of Salamanca with several lines
+  fares:
+    title: Up-to-date fares
+    text: Tickets, multi-trip cards and passes with their current price, so you know what suits you before you board.
+    tickets:
+      - { name: Single ticket, price: "€1.20" }
+      - { name: Bono-Bus card, price: "€0.37", unit: per trip }
+      - { name: Youth pass, price: "€7.34", unit: per month }
+    chips: [Valid from 1 January 2026]
+    alt: Fares screen
+  yours:
+    title: Your way
+    text: Choose how to see arrival times, the theme and the language. Works with TalkBack and large text.
+    toggle: "Arrival format: minutes or clock time"
+    relative: in 2 min
+    clock: "10:02"
+    chips: [◐ Light and dark, ES · EN, Aa Large text, TalkBack]
+    alt: Nearby screen in dark mode, with times in minutes
+
+gallery:
+  kicker: Screenshots
+  title: What it looks like on your phone
+  zoom: Enlarge
+  viewer: Enlarged screenshot
+  close: Close
+  prev: Previous
+  next: Next
+  shots:
+    - Your bus, in real time
+    - When's your bus coming?
+    - Every line
+    - The route, stop by stop
+    - The whole network, your way
+    - Recognise your stop
+
+closing:
+  title: Leave home right on time
+
+footer:
+  label: Footer
+  privacy: Privacy policy
+  disclaimer: Salamanca Bus is an independent app, not affiliated with Salamanca de Transportes or Salamanca City Council. Arrival times are the ones published by Salamanca de Transportes' information service.
+  trademark: Google Play and the Google Play logo are trademarks of Google LLC.
+
+updated: "Last updated:"

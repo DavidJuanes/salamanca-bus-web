@@ -1,0 +1,18 @@
+# Line badges with their colours, from bus-data-library's lines.json. "dark" lines need dark text.
+- { id: "1", color: "#262626" }
+- { id: "2", color: "#E05B62" }
+- { id: "3", color: "#4946D8" }
+- { id: "4", color: "#3AA42B" }
+- { id: "5", color: "#ACDD4A", dark: true }
+- { id: "6", color: "#E8AF4F", dark: true }
+- { id: "7", color: "#B93CD8" }
+- { id: "8", color: "#B0B0B0", dark: true }
+- { id: "9", color: "#619DC0" }
+- { id: "10", color: "#D7976F", dark: true }
+- { id: "11", color: "#D8C634", dark: true }
+- { id: "12", color: "#B45825" }
+- { id: "13", color: "#4B83D8" }
+- { id: "14", color: "#004101" }
+- { id: "15", color: "#ff66fc", dark: true }
+- { id: "N-1", color: "#1d1d93" }
+- { id: "N-2", color: "#b23939" }

@@ -1,0 +1,33 @@
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- if page.ref %}{% assign alt = site.pages | where: "ref", page.ref | where_exp: "p", "p.lang != page.lang" | first %}{% else %}{% assign alt = nil %}{% endif -%}
+<!doctype html>
+<html lang="{{ page.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f79b2">
+  <title>{% if page.ref == "home" %}{{ site.title }} · {{ t.tagline }}{% else %}{{ page.title }} · {{ site.title }}{% endif %}</title>
+  {% seo title=false %}
+  {%- for p in site.pages %}{% if p.ref == page.ref and p.ref %}
+  <link rel="alternate" hreflang="{{ p.lang }}" href="{{ p.url | absolute_url }}">{% endif %}{% endfor %}
+  {%- if page.ref and page.lang == "es" %}
+  <link rel="alternate" hreflang="x-default" href="{{ page.url | absolute_url }}">{% elsif alt %}
+  <link rel="alternate" hreflang="x-default" href="{{ alt.url | absolute_url }}">{% endif %}
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/img/favicon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/overpass-700-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/atkinson-hyperlegible-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+</head>
+<body>
+  {% include header.html t=t alt=alt %}
+  <main id="contenido">
+    {{ content }}
+  </main>
+  {% include footer.html t=t alt=alt %}
+  {%- if page.script %}
+  <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+  {%- endif %}
+</body>
+</html>

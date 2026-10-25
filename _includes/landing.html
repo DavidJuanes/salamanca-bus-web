@@ -1,0 +1,166 @@
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- assign s = t.story -%}
+{%- capture screens %}/assets/img/screens/{{ page.lang }}{% endcapture -%}
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="eyebrow">{{ t.hero.eyebrow }}</div>
+      <h1>{{ t.hero.title }}</h1>
+      <p class="lead">{{ t.hero.lead }}</p>
+      <div class="cta-row">
+        {% include play-badge.html t=t %}
+        <span class="note">{{ t.hero.note }}</span>
+      </div>
+      <div class="board" role="img" aria-label="{{ t.hero.board_label }}">
+        <div class="board-head"><span>{{ t.hero.board_stop }}</span><span id="clock">14:02</span></div>
+        <div id="rows"></div>
+      </div>
+    </div>
+    <div class="phone hero-phone" aria-hidden="true"><div class="screen"><img class="on" src="{{ screens }}/nearby.webp" alt="" width="600" height="1300" fetchpriority="high"></div></div>
+  </div>
+</section>
+
+<section class="stats" aria-label="{{ t.stats.label }}">
+  <div class="wrap">
+    <div class="stat reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{% include icon.html name="route" %}</svg></span><b>17</b><span>{{ t.stats.lines }}</span></div>
+    <div class="stat reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{% include icon.html name="stop" %}</svg></span><b>346</b><span>{{ t.stats.stops }}</span></div>
+    <div class="stat reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{% include icon.html name="calendar" %}</svg></span><b>2012</b><span>{{ t.stats.since }}</span></div>
+    <div class="stat reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{% include icon.html name="no-account" %}</svg></span><b>0 €</b><span>{{ t.stats.free }}</span></div>
+  </div>
+</section>
+
+<section class="story" id="funciones">
+  <div class="wrap">
+    <div class="kicker">{{ s.kicker }}</div>
+    <h2>{{ s.title }}</h2>
+    <p class="intro">{{ s.intro }}</p>
+    <div class="story-grid">
+      <div class="steps" id="steps">
+        <span class="route-fill" aria-hidden="true"></span>
+
+        <article class="step" style="--c:#3AA42B">
+          <span class="stop-dot" aria-hidden="true"></span>
+          <div class="card reveal">
+            <h3><span class="badge">4</span>{{ s.nearby.title }}</h3>
+            <p>{{ s.nearby.text }}</p>
+            <div class="demo">
+              <div class="arr"><span class="badge sm" style="background:#3AA42B">4</span><div class="who"><b>Cementerio</b><small>{{ s.nearby.first_away }}</small></div><div class="when"><b class="tick" data-m="2" data-in="{{ s.nearby.in }}" data-now="{{ s.nearby.now }}">{{ s.nearby.in | replace: "%m", "2" }}</b><small>{{ s.nearby.first_then }}</small></div></div>
+              <div class="arr"><span class="badge sm" style="background:#B0B0B0;color:#171c22">8</span><div class="who"><b>Vistahermosa</b><small>{{ s.nearby.second_away }}</small></div><div class="when"><b class="tick" data-m="4" data-in="{{ s.nearby.in }}" data-now="{{ s.nearby.now }}">{{ s.nearby.in | replace: "%m", "4" }}</b><small>{{ s.nearby.second_then }}</small></div></div>
+            </div>
+            <div class="chips">{% for c in s.nearby.chips %}<span class="chip{% if forloop.first %} live{% endif %}">{% if forloop.first %}<i></i>{% endif %}{{ c }}</span>{% endfor %}</div>
+          </div>
+          <img class="mini" src="{{ screens }}/nearby.webp" alt="{{ s.nearby.alt }}" width="600" height="1300" loading="lazy">
+        </article>
+
+        <article class="step" style="--c:#E05B62">
+          <span class="stop-dot" aria-hidden="true"></span>
+          <div class="card reveal">
+            <h3><span class="badge">2</span>{{ s.stop.title }}</h3>
+            <p>{{ s.stop.text }}</p>
+            <div class="demo stopdemo">
+              <svg class="compass" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-width="3"/><g class="needle"><path d="M32 8 40 32H24Z" fill="#E05B62"/><path d="M32 56 24 32h16Z" fill="currentColor" fill-opacity=".45"/></g><circle cx="32" cy="32" r="4" fill="currentColor"/></svg>
+              <div class="who"><b>Gran Vía, 38</b><small>{{ s.stop.detail }}</small></div>
+            </div>
+            <div class="chips">{% for c in s.stop.chips %}<span class="chip">{{ c }}</span>{% endfor %}</div>
+          </div>
+          <img class="mini" src="{{ screens }}/stop.webp" alt="{{ s.stop.alt }}" width="600" height="1300" loading="lazy">
+        </article>
+
+        <article class="step" style="--c:#4946D8">
+          <span class="stop-dot" aria-hidden="true"></span>
+          <div class="card reveal">
+            <h3><span class="badge">3</span>{{ s.lines.title }}</h3>
+            <p>{{ s.lines.text }}</p>
+            <div class="demo">
+              <div class="linehead"><span class="badge sm" style="background:#3AA42B">4</span><b>Cementerio - Puente Ladrillo</b><span class="pill">{{ s.lines.active }}</span></div>
+              <ol class="minirouta" style="--lc:#3AA42B"><li>Arq. Repullés</li><li>Glorieta Ramiro II</li><li>Av. Los Maristas</li><li>P.º San Vicente</li></ol>
+            </div>
+            <div class="chips">{% for c in s.lines.chips %}<span class="chip">{{ c }}</span>{% endfor %}</div>
+          </div>
+          <img class="mini" src="{{ screens }}/line.webp" alt="{{ s.lines.alt }}" width="600" height="1300" loading="lazy">
+        </article>
+
+        <article class="step" style="--c:#1d1d93">
+          <span class="stop-dot" aria-hidden="true"></span>
+          <div class="card reveal">
+            <h3><span class="badge">N-1</span>{{ s.map.title }}</h3>
+            <p>{{ s.map.text }}</p>
+            <div class="demo legend" role="img" aria-label="{{ s.map.legend }}">
+              {%- for l in site.data.lines %}<span style="background:{{ l.color }}{% if l.dark %};color:#171c22{% endif %}">{{ l.id }}</span>{% endfor -%}
+            </div>
+            <div class="chips">{% for c in s.map.chips %}<span class="chip">{{ c }}</span>{% endfor %}</div>
+          </div>
+          <img class="mini" src="{{ screens }}/map.webp" alt="{{ s.map.alt }}" width="600" height="1055" loading="lazy">
+        </article>
+
+        <article class="step" style="--c:#B45825">
+          <span class="stop-dot" aria-hidden="true"></span>
+          <div class="card reveal">
+            <h3><span class="badge">12</span>{{ s.fares.title }}</h3>
+            <p>{{ s.fares.text }}</p>
+            <div class="demo tickets">
+              {%- for k in s.fares.tickets %}
+              <div class="ticket"><small>{{ k.name }}</small><b>{{ k.price }}</b>{% if k.unit %}<small>{{ k.unit }}</small>{% endif %}</div>
+              {%- endfor %}
+            </div>
+            <div class="chips">{% for c in s.fares.chips %}<span class="chip">{{ c }}</span>{% endfor %}</div>
+          </div>
+          <img class="mini" src="{{ screens }}/fares.webp" alt="{{ s.fares.alt }}" width="600" height="1300" loading="lazy">
+        </article>
+
+        <article class="step" style="--c:#262626">
+          <span class="stop-dot" aria-hidden="true"></span>
+          <div class="card reveal">
+            <h3><span class="badge">1</span>{{ s.yours.title }}</h3>
+            <p>{{ s.yours.text }}</p>
+            <div class="demo">
+              <button type="button" class="seg" id="seg" aria-label="{{ s.yours.toggle }}" aria-pressed="false"><span class="seg-a">{{ s.yours.relative }}</span><span class="seg-b">{{ s.yours.clock }}</span></button>
+            </div>
+            <div class="chips">{% for c in s.yours.chips %}<span class="chip">{{ c }}</span>{% endfor %}</div>
+          </div>
+          <div class="mini fmt"><img src="{{ screens }}/nearby-dark.webp" alt="{{ s.yours.alt }}" width="600" height="1300" loading="lazy"><img class="alt" src="{{ screens }}/nearby-dark-clock.webp" alt="" aria-hidden="true" width="600" height="1300" loading="lazy"></div>
+        </article>
+      </div>
+      <div class="pin" aria-hidden="true">
+        <div class="phone"><div class="screen" id="screen">
+          <img class="on" src="{{ screens }}/nearby.webp" alt="">
+          <img src="{{ screens }}/stop.webp" alt="" loading="lazy">
+          <img src="{{ screens }}/line.webp" alt="" loading="lazy">
+          <img class="dark" src="{{ screens }}/map.webp" alt="" loading="lazy">
+          <img src="{{ screens }}/fares.webp" alt="" loading="lazy">
+          <img class="dark" src="{{ screens }}/nearby-dark.webp" alt="" loading="lazy">
+          <img class="dark fmtclock" src="{{ screens }}/nearby-dark-clock.webp" alt="" loading="lazy">
+        </div></div>
+        <div class="dots" id="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="capturas">
+  <div class="wrap">
+    <div class="kicker">{{ t.gallery.kicker }}</div>
+    <h2>{{ t.gallery.title }}</h2>
+    <ul class="shots">
+      {%- for alt in t.gallery.shots %}
+      <li><button type="button" data-i="{{ forloop.index0 }}" data-big="/assets/img/play/{{ page.lang }}/{{ forloop.index }}-lg.webp" aria-label="{{ t.gallery.zoom }}: {{ alt }}"><img src="/assets/img/play/{{ page.lang }}/{{ forloop.index }}.webp" alt="{{ alt }}" width="400" height="711" loading="lazy"></button></li>
+      {%- endfor %}
+    </ul>
+  </div>
+  <dialog class="viewer" id="viewer" aria-label="{{ t.gallery.viewer }}">
+    <figure><img id="vimg" alt=""><figcaption id="vcap"></figcaption></figure>
+    <button type="button" class="vbtn vclose" id="vclose" aria-label="{{ t.gallery.close }}">✕</button>
+    <button type="button" class="vbtn vprev" id="vprev" aria-label="{{ t.gallery.prev }}">‹</button>
+    <button type="button" class="vbtn vnext" id="vnext" aria-label="{{ t.gallery.next }}">›</button>
+  </dialog>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <img src="/assets/img/icon.webp" alt="" class="reveal" width="96" height="96">
+    <div class="reveal">
+      <h2>{{ t.closing.title }}</h2>
+      {% include play-badge.html t=t %}
+    </div>
+  </div>
+</section>
