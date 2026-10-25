@@ -74,8 +74,8 @@ h1, h2, h3 { font-family: var(--f-display); line-height: 1.05; text-wrap: balanc
 .hero h1 { font-size: var(--step-4); font-weight: 900; letter-spacing: -.02em; margin-block: 14px 18px; }
 .lead { font-size: var(--step-1); max-width: 30ch; margin: 0 0 28px; opacity: .95; }
 .cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-/* Official Google Play badge: the PNG carries its own clear space, so the negative margin lines it up with the text. */
-.play { display: inline-block; margin: -12px 0 -12px -12px; line-height: 0; transition: transform .2s; }
+/* Official Google Play badge: the PNG carries clear space above and below (29/250 of its height), so a negative block margin lines it up. */
+.play { display: inline-block; margin-block: -9.5px; line-height: 0; transition: transform .2s; }
 .play:hover { transform: translateY(-2px); }
 .play img { height: 82px; width: auto; }
 .note { font-size: var(--step--1); opacity: .85; }
@@ -130,7 +130,15 @@ h1, h2, h3 { font-family: var(--f-display); line-height: 1.05; text-wrap: balanc
 .steps { min-width: 0; position: relative; padding-left: 52px; --p: 0%; }
 .steps::before, .route-fill { content: ""; position: absolute; left: 15px; top: 0; width: 6px; border-radius: 3px; }
 .steps::before { bottom: 0; background: var(--line); }
-.route-fill { height: var(--p); background: var(--active, var(--brand)); transition: height .5s ease, background .5s; }
+/* The coloured route ends at the last stop and takes each line's colour between stops (both set by main.js). Without
+   scroll-driven animations it jumps from stop to stop (--p); with them it grows with the scroll, its tip on the sync line. */
+.route-fill { height: var(--end, 100%); background: var(--route, var(--brand)); clip-path: inset(0 0 calc(100% - var(--p, 0px)) 0 round 3px); transition: clip-path .5s ease; }
+@supports (animation-timeline: view()) {
+  .route-fill { transition: none; animation: route-grow linear both; animation-timeline: view(block var(--lt, 50%) var(--lb, 50%)); animation-range: cover 0% cover 100%; }
+  .stop-dot { animation: stop-reached linear both; animation-timeline: view(block var(--lt, 50%) var(--lb, 50%)); animation-range: cover 0% cover 100%; }
+}
+@keyframes route-grow { from { clip-path: inset(0 0 100% 0 round 3px); } to { clip-path: inset(0 0 0 0 round 3px); } }
+@keyframes stop-reached { 0%, 49.9% { border-color: var(--line); } 50%, 100% { border-color: var(--c); } }
 .step { position: relative; min-height: 78vh; display: flex; flex-direction: column; justify-content: center; padding-block: 24px; }
 .stop-dot { position: absolute; left: -46px; top: 50%; width: 30px; height: 30px; margin-top: -15px; border-radius: 50%;
   background: var(--bg); border: 6px solid var(--line); transition: border-color .4s, transform .4s; }
@@ -240,9 +248,9 @@ h1, h2, h3 { font-family: var(--f-display); line-height: 1.05; text-wrap: balanc
 /* Closing */
 .closing { padding-block: 90px; text-align: left; }
 .closing .wrap { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; }
-.closing img { width: 96px; height: 96px; border-radius: 24px; box-shadow: var(--shadow); }
+.closing .app-icon { width: 96px; height: 96px; border-radius: 24px; box-shadow: var(--shadow); }
 .closing h2 { font-size: var(--step-3); font-weight: 900; margin-bottom: 14px; }
-@media (max-width: 560px) { .closing .wrap { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .closing .wrap { grid-template-columns: 1fr; justify-items: center; text-align: center; } }
 
 footer { border-top: 1px solid var(--line); color: var(--muted); font-size: var(--step--1); padding-block: 32px 48px; }
 footer .wrap { display: grid; gap: 14px; }
@@ -253,6 +261,8 @@ footer p { margin: 0; max-width: 72ch; }
 @media (max-width: 860px) {
   .hero .wrap { grid-template-columns: 1fr; padding-top: 36px; }
   .hero-copy { padding-bottom: 0; }
+  .cta-row { flex-direction: column; justify-content: center; }
+  .board { margin-inline: auto; }
   .hero-phone { width: min(250px, 70%); margin-bottom: -70px; }
 }
 /* Text pages (privacy policy, 404) */

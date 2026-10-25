@@ -95,6 +95,9 @@
     const r = phone.getBoundingClientRect();
     const pinTop = r.height ? parseFloat(getComputedStyle(phone.parentElement).top) || 0 : 0;
     const line = Math.round(r.height ? pinTop + r.height / 2 : innerHeight / 2);
+    // The CSS route animation uses the same line, as the insets of its view timeline.
+    stepsBox.style.setProperty("--lt", line + "px");
+    stepsBox.style.setProperty("--lb", Math.max(0, innerHeight - line - 1) + "px");
     io = new IntersectionObserver(es => {
       es.forEach(e => {
         if (!e.isIntersecting) return;
@@ -104,8 +107,22 @@
     }, { rootMargin: `-${line}px 0px -${Math.max(0, innerHeight - line - 1)}px 0px` });
     cards.forEach(c => io.observe(c));
   }
+  // The route stops at the last stop, and each stretch takes the colour of the stop it leads to.
+  function layoutRoute() {
+    const centres = steps.map(s => { const d = s.querySelector(".stop-dot"); return s.offsetTop + d.offsetTop + d.offsetHeight / 2; });
+    const end = centres[centres.length - 1];
+    const colours = steps.map(s => getComputedStyle(s).getPropertyValue("--c").trim());
+    const stops = [`${colours[0]} 0px`, `${colours[0]} ${centres[0]}px`];
+    for (let k = 1; k < steps.length; k++) stops.push(`${colours[k]} ${centres[k - 1]}px`, `${colours[k]} ${centres[k]}px`);
+    stepsBox.style.setProperty("--end", end + "px");
+    stepsBox.style.setProperty("--route", `linear-gradient(180deg, ${stops.join(", ")})`);
+  }
+  function relayout() { layoutRoute(); watch(); show(current); }
   let resizeTimer;
-  addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { watch(); show(current); }, 200); });
+  addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(relayout, 200); });
+  addEventListener("load", relayout);
+  document.fonts?.ready.then(relayout);
+  layoutRoute();
   show(0);
   watch();
 
