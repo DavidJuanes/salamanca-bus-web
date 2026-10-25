@@ -80,10 +80,10 @@
           <img class="mini" src="{{ screens }}/line.webp" alt="{{ s.lines.alt }}" width="600" height="1300" loading="lazy">
         </article>
 
-        <article class="step" style="--c:#1d1d93">
+        <article class="step" style="--c:#B93CD8">
           <span class="stop-dot" aria-hidden="true"></span>
           <div class="card reveal">
-            <h3><span class="badge">N-1</span>{{ s.map.title }}</h3>
+            <h3><span class="badge">7</span>{{ s.map.title }}</h3>
             <p>{{ s.map.text }}</p>
             <div class="demo legend" role="img" aria-label="{{ s.map.legend }}">
               {%- for l in site.data.lines %}<span style="background:{{ l.color }}{% if l.dark %};color:#171c22{% endif %}">{{ l.id }}</span>{% endfor -%}
@@ -108,10 +108,10 @@
           <img class="mini" src="{{ screens }}/fares.webp" alt="{{ s.fares.alt }}" width="600" height="1300" loading="lazy">
         </article>
 
-        <article class="step" style="--c:#262626">
+        <article class="step" style="--c:#619DC0">
           <span class="stop-dot" aria-hidden="true"></span>
           <div class="card reveal">
-            <h3><span class="badge">1</span>{{ s.yours.title }}</h3>
+            <h3><span class="badge">9</span>{{ s.yours.title }}</h3>
             <p>{{ s.yours.text }}</p>
             <div class="demo">
               <button type="button" class="seg" id="seg" aria-label="{{ s.yours.toggle }}" aria-pressed="false"><span class="seg-a">{{ s.yours.relative }}</span><span class="seg-b">{{ s.yours.clock }}</span></button>

@@ -130,7 +130,7 @@ h1, h2, h3 { font-family: var(--f-display); line-height: 1.05; text-wrap: balanc
 .steps { min-width: 0; position: relative; padding-left: 52px; --p: 0%; }
 .steps::before, .route-fill { content: ""; position: absolute; left: 15px; top: 0; width: 6px; border-radius: 3px; }
 .steps::before { bottom: 0; background: var(--line); }
-/* The coloured route ends at the last stop and takes each line's colour between stops (both set by main.js). Without
+/* The coloured route ends at the last stop and blends between the stops' line colours (both set by main.js). Without
    scroll-driven animations it jumps from stop to stop (--p); with them it grows with the scroll, its tip on the sync line. */
 .route-fill { height: var(--end, 100%); background: var(--route, var(--brand)); clip-path: inset(0 0 calc(100% - var(--p, 0px)) 0 round 3px); transition: clip-path .5s ease; }
 @supports (animation-timeline: view()) {

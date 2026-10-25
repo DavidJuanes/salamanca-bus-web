@@ -107,13 +107,12 @@
     }, { rootMargin: `-${line}px 0px -${Math.max(0, innerHeight - line - 1)}px 0px` });
     cards.forEach(c => io.observe(c));
   }
-  // The route stops at the last stop, and each stretch takes the colour of the stop it leads to.
+  // The route stops at the last stop, and blends from each stop's colour to the next one's, so the colour shifts as it grows.
   function layoutRoute() {
     const centres = steps.map(s => { const d = s.querySelector(".stop-dot"); return s.offsetTop + d.offsetTop + d.offsetHeight / 2; });
     const end = centres[centres.length - 1];
     const colours = steps.map(s => getComputedStyle(s).getPropertyValue("--c").trim());
-    const stops = [`${colours[0]} 0px`, `${colours[0]} ${centres[0]}px`];
-    for (let k = 1; k < steps.length; k++) stops.push(`${colours[k]} ${centres[k - 1]}px`, `${colours[k]} ${centres[k]}px`);
+    const stops = [`${colours[0]} 0px`, ...centres.map((y, k) => `${colours[k]} ${y}px`)];
     stepsBox.style.setProperty("--end", end + "px");
     stepsBox.style.setProperty("--route", `linear-gradient(180deg, ${stops.join(", ")})`);
   }
